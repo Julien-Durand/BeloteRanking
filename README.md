@@ -1,1 +1,22 @@
-# BeloteRanking
+# Belote-ScoreBoard
+
+Application pour sauvegarder les scores de belote ! Elle permet aussi d'afficher les scores et différentes statistiques de chaques joueurs. (Tableau, %, Elo, Graph)
+
+
+# Développement 
+
+1: Création d'un compte
+2: Connection 
+3: Ajouter des joueurs (fiche du joueur, photo...)
+4: Ajouter une partie (score, manche prises...)
+5: Afficher les scores des différentes parties
+6: Afficher les stats des joueurs
+7: Voir toutes les stats d'un joueur
+8: Podium best player (Rank)
+9: Graph
+
+# Tools
+
+Développement avec angular. Utilisation de bootstrap, firebase
+
+# Just for fun and work my angular skill
