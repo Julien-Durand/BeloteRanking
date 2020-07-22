@@ -2,42 +2,39 @@ import { Injectable } from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AuthService} from './auth.service';
 import {Joueur} from '../models/joueur.model';
-import {Subject} from 'rxjs';
-
 @Injectable({
   providedIn: 'root'
 })
 export class PlayersService {
 
-  player: Joueur[] = [];
-  playersSubject = new Subject<Joueur[]>();
 
   constructor(private db: AngularFirestore,
               private authService: AuthService) { }
-
+  /*Create id*/
   idGenerator(){
     return '' +  Math.random().toString(36).substr(2, 9);
   }
 
-  emitPlayer() {
-    this.playersSubject.next(this.player);
+  /*Add Player*/
+  addPlayer(idunique, name) {
+    // const joueurObject = {...joueur};
+    return this.db.collection('Joueurs').add({
+      id: idunique,
+      nom: name,
+      MoyenPriseParPoint: '0',
+      TotalPrise: '0',
+      ManchesWin: '0',
+      ManchesLose: '0',
+      TauxReussite: '0',
+      Win: '0',
+      Lose: '0',
+      RatioWin: '0',
+      TauxPriseGame: '0',
+      ELO: '0'
+    });
   }
+  /*Update*/
+  /*Delete player*/
 
-  create_joueur(player: Joueur) {
-    const joueur = {...player};
-    const id = this.idGenerator();
-    this.db.collection('/Joueurs').doc(id).set(joueur);
-  }
 
-  read_joueur() {
-    return this.db.collection('Joueurs').snapshotChanges();
-  }
-
-  update_joueur(nameId, name){
-    this.db.doc('Joueurs/' + nameId).update(name);
-  }
-
-  delete_joueur(nameId) {
-    this.db.doc('Students/' + nameId).delete();
-  }
 }

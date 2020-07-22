@@ -4,7 +4,6 @@ import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
 import {PlayersService} from '../../services/players.service';
 import {Joueur} from '../../models/joueur.model';
-import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'BR-joueur-form',
@@ -13,6 +12,9 @@ import {Subscription} from 'rxjs';
 })
 export class JoueurFormComponent implements OnInit {
   joueurForm: FormGroup;
+
+  joueur: Joueur = new Joueur();
+  joueurs: Joueur[];
 
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
@@ -30,14 +32,12 @@ export class JoueurFormComponent implements OnInit {
       });
   }
 
-  addPlayer(joueur: Joueur) {
-    return this.player.create_joueur(joueur);
-  }
+
 
   onSavePlayer() {
     const name = this.joueurForm.get('name').value;
     const id = this.player.idGenerator();
-    this.addPlayer(name);
+    this.player.addPlayer(id, name);
     this.router.navigate(['BeloteRanking']);
   }
 
