@@ -1,0 +1,12 @@
+<div class="container">
+  <h2>Ajouter un joueur dans le gang de la belote !</h2>
+  <div class="formulaire">
+    <form [formGroup]="joueurForm" (ngSubmit)="onSavePlayer()">
+      <div class="form-group">
+        <label for="name">Prénom</label>
+        <input type="text" id="name" class="form-control" formControlName="name">
+      </div>
+      <button type="submit" class="btn btn-success" [disabled]="joueurForm.invalid">Ajouter</button>
+    </form>
+  </div>
+</div>

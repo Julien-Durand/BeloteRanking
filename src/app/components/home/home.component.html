@@ -1,0 +1,23 @@
+<main>
+  <div class="container">
+    <div class="row" *ngIf="!(this.user | async)">
+    <!-- Not connected-->
+    <h1>Non Connecté</h1>
+    </div>
+
+    <!-- Connected -->
+    <div class="row" *ngIf="(this.user | async)">
+      <h1>Hello gang</h1>
+
+      <button class="btn btn-primary" (click)="btnAddPlayer()">Ajouter un joueur</button>
+      <ul>
+        <li *ngFor="let player of Joueur">
+          {{ player.name }}
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</main>
+
+
