@@ -15,6 +15,7 @@ export class JoueurFormComponent implements OnInit {
 
   joueur: Joueur = new Joueur();
   joueurs: Joueur[];
+  listPlayers: any[];
 
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
@@ -23,6 +24,7 @@ export class JoueurFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+    this.onGetPlayers();
   }
 
   initForm() {
@@ -32,13 +34,21 @@ export class JoueurFormComponent implements OnInit {
       });
   }
 
-
-
+  /*action add player with the form*/
   onSavePlayer() {
     const name = this.joueurForm.get('name').value;
     const id = this.player.idGenerator();
     this.player.addPlayer(id, name);
     this.router.navigate(['BeloteRanking']);
+  }
+
+  /*display the players*/
+  onGetPlayers(){
+    this.player
+      .getPlayers()
+      .subscribe(
+        res => (this.listPlayers = res)
+      );
   }
 
 }

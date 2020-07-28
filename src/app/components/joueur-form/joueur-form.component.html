@@ -9,4 +9,11 @@
       <button type="submit" class="btn btn-success" [disabled]="joueurForm.invalid">Ajouter</button>
     </form>
   </div>
+
+  <h3>Joueur du gang !</h3>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let name of listPlayers">
+      <span>{{name.payload.doc.data().nom}}</span>
+    </li>
+  </ul>
 </div>

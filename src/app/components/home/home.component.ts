@@ -19,7 +19,10 @@ export class HomeComponent implements OnInit {
   }
 
   btnAddPlayer() {
-    this.router.navigate(['Joueur']);
+    this.router.navigate(['BeloteRanking/Joueur']);
+  }
+  btnBelote() {
+    this.router.navigate(['BeloteRanking/Belote']);
   }
 
 }

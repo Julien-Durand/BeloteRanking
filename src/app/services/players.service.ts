@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AuthService} from './auth.service';
-import {Joueur} from '../models/joueur.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,10 +14,9 @@ export class PlayersService {
     return '' +  Math.random().toString(36).substr(2, 9);
   }
 
-  /*Add Player*/
+  /* Add Player */
   addPlayer(idunique, name) {
-    // const joueurObject = {...joueur};
-    return this.db.collection('Joueurs').add({
+    return this.db.collection('Joueurs').doc('' + idunique).set({
       id: idunique,
       nom: name,
       MoyenPriseParPoint: '0',
@@ -33,8 +31,16 @@ export class PlayersService {
       ELO: '0'
     });
   }
-  /*Update*/
-  /*Delete player*/
+  /* Read */
+  getPlayers() {
+    return this.db.collection('Joueurs').snapshotChanges();
+  }
+
+  getPlayer(id) {
+    return this.db.collection('Joueurs').doc(id).snapshotChanges();
+  }
+  /* Update */
+  /* Delete player */
 
 
 }

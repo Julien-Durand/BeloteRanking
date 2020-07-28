@@ -16,6 +16,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { JoueurFormComponent } from './components/joueur-form/joueur-form.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import { BeloteFormComponent } from './components/belote-form/belote-form.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {ReactiveFormsModule} from '@angular/forms';
     HomeComponent,
     HeaderComponent,
     FooterComponent,
-    JoueurFormComponent
+    JoueurFormComponent,
+    BeloteFormComponent
   ],
   imports: [
     BrowserModule,
