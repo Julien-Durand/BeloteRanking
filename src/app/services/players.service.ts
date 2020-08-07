@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AuthService} from './auth.service';
+import { map, filter, catchError, mergeMap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -36,9 +37,12 @@ export class PlayersService {
     return this.db.collection('Joueurs').snapshotChanges();
   }
 
-  getPlayer(id) {
-    return this.db.collection('Joueurs').doc(id).snapshotChanges();
-  }
+  // getPlayer(idc) {
+  //   return this.db.collection('Partie')
+  //     .doc(idc)
+  //     .snapshotChanges();
+  // }
+
   /* Update */
   /* Delete player */
 

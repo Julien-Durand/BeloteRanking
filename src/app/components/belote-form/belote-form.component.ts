@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PlayersService} from '../../services/players.service';
 import {DatePipe, registerLocaleData} from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import {BeloteService} from '../../services/belote.service';
+import {Game} from '../../models/belote.model';
+import {Subscription} from 'rxjs';
+import {Router} from '@angular/router';
 registerLocaleData(localeFr, 'fr');
 
 @Component({
@@ -11,11 +14,17 @@ registerLocaleData(localeFr, 'fr');
   templateUrl: './belote-form.component.html',
   styleUrls: ['./belote-form.component.scss']
 })
-export class BeloteFormComponent implements OnInit {
+export class BeloteFormComponent implements OnInit, OnDestroy  {
   beloteForm: FormGroup;
   listPlayers: any[];
   playerInfo: any;
-  teamOk: boolean;
+  playerNameOfGame;
+  idforGame: string;
+
+  belotegame: Game[];
+  beloteSubscription: Subscription;
+
+
 
   /*Date*/
   pipe = new DatePipe('fr');
@@ -25,9 +34,17 @@ export class BeloteFormComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private player: PlayersService,
-              private belote: BeloteService) { }
+              private belote: BeloteService,
+              private router: Router) { }
 
   ngOnInit(): void {
+    this.beloteSubscription = this.belote.BeloteSubject.subscribe(
+      (belotegame: Game[]) => {
+        this.belotegame = belotegame;
+      }
+    );
+    this.belote.emitBeloteGame();
+    this.idforGame = this.player.idGenerator();
     this.initBelote();
     this.onGetPlayers();
   }
@@ -43,15 +60,17 @@ export class BeloteFormComponent implements OnInit {
   }
 
   onSaveTeam() {
-    this.teamOk = true;
-    const id = this.player.idGenerator();
+    const date = this.date;
     const p1 = this.beloteForm.get('p1').value;
     const p2 = this.beloteForm.get('p2').value;
     const p3 = this.beloteForm.get('p3').value;
     const p4 = this.beloteForm.get('p4').value;
-    this.belote.addGame(id, this.date, p1, p2, p3, p4);
-
+    const newBelote = new Game(this.idforGame, date, p1, p2, p3, p4, 0, 0, 1);
+    this.belote.createPartie(newBelote, this.idforGame);
+    this.router.navigate(['BeloteRanking/Manches', this.idforGame]);
   }
+
+
   /*display the players*/
   onGetPlayers(){
     this.player
@@ -61,11 +80,16 @@ export class BeloteFormComponent implements OnInit {
       );
   }
 
-  getPlayerInfo(id) {
-    this.player
-      .getPlayer(id)
-      .subscribe(
-        res => (this.playerInfo = res)
-      );
+  // getPlayerInfo(id) {
+  //   this.player
+  //     .getPlayer(id)
+  //     .subscribe(
+  //       res => (this.playerInfo = res)
+  //     );
+  // }
+
+
+  ngOnDestroy() {
+    this.beloteSubscription.unsubscribe();
   }
 }
