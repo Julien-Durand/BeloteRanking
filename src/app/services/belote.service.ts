@@ -26,13 +26,18 @@ export class BeloteService {
   addBelote(belotegame: Game, id: string) {
     const partie = {...belotegame};
     this.db.collection('CurrentGame').doc(id).set(partie);
-  }
-  addFinalBelote(belotegame: any, id: string) {
-    const partie = {...belotegame};
-    this.db.collection('Parties').add(belotegame);
+    this.db.collection('Games').doc(id).set(partie);
   }
   createPartie(belotegame: Game, id: string){
     this.addBelote(belotegame, id);
+    this.emitBeloteGame();
+  }
+  addFinalBelote(belotegame: any, id: string) {
+    const partie = {...belotegame};
+    this.db.collection('Parties').doc(id).set(partie);
+  }
+  createFinalPartie(belotegame: Game, id: string){
+    this.addFinalBelote(belotegame, id);
     this.emitBeloteGame();
   }
 
@@ -87,7 +92,7 @@ export class BeloteService {
 
   /* Read game information */
   getGame() {
-    return this.db.collection('CurrentGame').snapshotChanges();
+    return this.db.collection('Games').snapshotChanges();
   }
   /* Return Player in current game*/
   getPlayerGame(id) {
@@ -98,100 +103,145 @@ export class BeloteService {
   // }
 
   /* Update data for current game */
-  updateManche(id, mancheN, scoreTeamA, scoreTeamB, preneur) {
+  updateManche(id, mancheN, scoreTeamA, scoreTeamB, scoreTotalA, scoreTotalB, preneur) {
     switch (mancheN) {
       case 1:
-        return this.db.collection('CurrentGame').doc(id).update({
+        this.db.collection('Games').doc(id).update({
           manche: mancheN,
-          scoreA: scoreTeamA,
-          scoreB: scoreTeamB,
+          scoreA: scoreTotalA,
+          scoreB: scoreTotalB,
           M1A: scoreTeamA,
           M1B: scoreTeamB,
           preneurM1: preneur
         });
+        this.db.collection('CurrentGame').doc(id).update({
+          manche: mancheN,
+          scoreA: scoreTotalA,
+          scoreB: scoreTotalB
+        });
         break;
       case 2:
-        return this.db.collection('CurrentGame').doc(id).update({
+        this.db.collection('Games').doc(id).update({
           manche: mancheN,
-          scoreA: scoreTeamA,
-          scoreB: scoreTeamB,
+          scoreA: scoreTotalA,
+          scoreB: scoreTotalB,
           M2A: scoreTeamA,
           M2B: scoreTeamB,
           preneurM2: preneur
         });
+        this.db.collection('CurrentGame').doc(id).update({
+          manche: mancheN,
+          scoreA: scoreTotalA,
+          scoreB: scoreTotalB
+        });
         break;
       case 3:
-        return this.db.collection('CurrentGame').doc(id).update({
+        this.db.collection('Games').doc(id).update({
           manche: mancheN,
-          scoreA: scoreTeamA,
-          scoreB: scoreTeamB,
+          scoreA: scoreTotalA,
+          scoreB: scoreTotalB,
           M3A: scoreTeamA,
           M3B: scoreTeamB,
           preneurM3: preneur
         });
+        this.db.collection('CurrentGame').doc(id).update({
+          manche: mancheN,
+          scoreA: scoreTotalA,
+          scoreB: scoreTotalB
+        });
         break;
       case 4:
-        return this.db.collection('CurrentGame').doc(id).update({
+        this.db.collection('Games').doc(id).update({
           manche: mancheN,
-          scoreA: scoreTeamA,
-          scoreB: scoreTeamB,
+          scoreA: scoreTotalA,
+          scoreB: scoreTotalB,
           M4A: scoreTeamA,
           M4B: scoreTeamB,
           preneurM4: preneur
         });
+        this.db.collection('CurrentGame').doc(id).update({
+          manche: mancheN,
+          scoreA: scoreTotalA,
+          scoreB: scoreTotalB
+        });
         break;
       case 5:
-        return this.db.collection('CurrentGame').doc(id).update({
+        this.db.collection('Games').doc(id).update({
           manche: mancheN,
-          scoreA: scoreTeamA,
-          scoreB: scoreTeamB,
+          scoreA: scoreTotalA,
+          scoreB: scoreTotalB,
           M5A: scoreTeamA,
           M5B: scoreTeamB,
           preneurM5: preneur
         });
+        this.db.collection('CurrentGame').doc(id).update({
+          manche: mancheN,
+          scoreA: scoreTotalA,
+          scoreB: scoreTotalB
+        });
         break;
       case 6:
-        return this.db.collection('CurrentGame').doc(id).update({
+        this.db.collection('Games').doc(id).update({
           manche: mancheN,
-          scoreA: scoreTeamA,
-          scoreB: scoreTeamB,
+          scoreA: scoreTotalA,
+          scoreB: scoreTotalB,
           M6A: scoreTeamA,
           M6B: scoreTeamB,
           preneurM6: preneur
         });
+        this.db.collection('CurrentGame').doc(id).update({
+          manche: mancheN,
+          scoreA: scoreTotalB,
+          scoreB: scoreTotalB
+        });
         break;
       case 7:
-        return this.db.collection('CurrentGame').doc(id).update({
+        this.db.collection('Games').doc(id).update({
           manche: mancheN,
-          scoreA: scoreTeamA,
-          scoreB: scoreTeamB,
+          scoreA: scoreTotalA,
+          scoreB: scoreTotalB,
           M7A: scoreTeamA,
           M7B: scoreTeamB,
           preneurM7: preneur
         });
+        this.db.collection('CurrentGame').doc(id).update({
+          manche: mancheN,
+          scoreA: scoreTotalA,
+          scoreB: scoreTotalB
+        });
         break;
       case 8:
-        return this.db.collection('CurrentGame').doc(id).update({
+        this.db.collection('Games').doc(id).update({
           manche: mancheN,
-          scoreA: scoreTeamA,
-          scoreB: scoreTeamB,
+          scoreA: scoreTotalA,
+          scoreB: scoreTotalB,
           M8A: scoreTeamA,
           M8B: scoreTeamB,
           preneurM8: preneur
         });
+        this.db.collection('CurrentGame').doc(id).update({
+          manche: mancheN,
+          scoreA: scoreTotalA,
+          scoreB: scoreTotalB
+        });
         break;
       case 9:
-        return this.db.collection('CurrentGame').doc(id).update({
+        this.db.collection('Games').doc(id).update({
           manche: mancheN,
-          scoreA: scoreTeamA,
-          scoreB: scoreTeamB,
+          scoreA: scoreTotalA,
+          scoreB: scoreTotalB,
           M9A: scoreTeamA,
           M9B: scoreTeamB,
           preneurM9: preneur
         });
+        this.db.collection('CurrentGame').doc(id).update({
+          manche: mancheN,
+          scoreA: scoreTotalA,
+          scoreB: scoreTotalB
+        });
         break;
       case 10:
-        return this.db.collection('CurrentGame').doc(id).update({
+        this.db.collection('Games').doc(id).update({
           manche: mancheN,
           scoreA: scoreTeamA,
           scoreB: scoreTeamB,
@@ -199,39 +249,43 @@ export class BeloteService {
           M10B: scoreTeamB,
           preneurM10: preneur
         });
-        break;
-      case 11:
-        return this.db.collection('CurrentGame').doc(id).update({
+        this.db.collection('CurrentGame').doc(id).update({
           manche: mancheN,
           scoreA: scoreTeamA,
-          scoreB: scoreTeamB,
+          scoreB: scoreTeamB
+        });
+        break;
+      case 11:
+        this.db.collection('Games').doc(id).update({
+          manche: mancheN,
+          scoreA: scoreTotalA,
+          scoreB: scoreTotalB,
           M11A: scoreTeamA,
           M11B: scoreTeamB,
           preneurM11: preneur
         });
+        this.db.collection('CurrentGame').doc(id).update({
+          manche: mancheN,
+          scoreA: scoreTotalA,
+          scoreB: scoreTotalB
+        });
         break;
       case 12:
-        return this.db.collection('CurrentGame').doc(id).update({
+        this.db.collection('Games').doc(id).update({
           manche: mancheN,
-          scoreA: scoreTeamA,
-          scoreB: scoreTeamB,
+          scoreA: scoreTotalA,
+          scoreB: scoreTotalB,
           M12A: scoreTeamA,
           M12B: scoreTeamB,
           preneurM12: preneur
         });
+        this.db.collection('CurrentGame').doc(id).update({
+          manche: mancheN,
+          scoreA: scoreTotalA,
+          scoreB: scoreTotalB
+        });
         break;
     }
-
-
-    return this.db
-      .collection('CurrentGame')
-      .doc(id)
-      .update({
-        manche: mancheN,
-        scoreA: scoreTeamA,
-        scoreB: scoreTeamB,
-        preneurM1: preneur
-      });
   }
 
   /* Delete current game */

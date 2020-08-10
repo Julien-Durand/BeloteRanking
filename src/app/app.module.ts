@@ -18,6 +18,7 @@ import { JoueurFormComponent } from './components/joueur-form/joueur-form.compon
 import {ReactiveFormsModule} from '@angular/forms';
 import { BeloteFormComponent } from './components/belote-form/belote-form.component';
 import { MancheFormComponent } from './components/manche-form/manche-form.component';
+import { ScoresComponent } from './components/scores/scores.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { MancheFormComponent } from './components/manche-form/manche-form.compon
     FooterComponent,
     JoueurFormComponent,
     BeloteFormComponent,
-    MancheFormComponent
+    MancheFormComponent,
+    ScoresComponent
   ],
   imports: [
     BrowserModule,

@@ -6,11 +6,14 @@
     </div>
 
     <!-- Connected -->
-    <div class="row" *ngIf="(this.user | async)">
-      <h1>Hello gang</h1>
+    <div class="content" *ngIf="(this.user | async)">
+      <h1 class="text-center">Hello gang</h1>
+      <div class="row mx-auto mt-5">
+        <button class="btn btn-outline-primary mx-auto" (click)="btnAddPlayer()">Ajouter un joueur</button>
+        <button class="btn btn-outline-success mx-auto" (click)="btnBelote()">Belote !</button>
+        <button class="btn btn-outline-info mx-auto" (click)="bntScores()">Scores</button>
+      </div>
 
-      <button class="btn btn-primary" (click)="btnAddPlayer()">Ajouter un joueur</button>
-      <button class="btn btn-success" (click)="btnBelote()">Belote !</button>
       <ul>
 <!--        <li *ngFor="let player of Joueur">-->
 <!--          {{ player.name }}-->

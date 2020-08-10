@@ -1,17 +1,17 @@
 <div class="container">
-  <h2>Ajouter un joueur dans le gang de la belote !</h2>
-  <div class="formulaire">
+  <div class="formulaire mt-3">
+    <h2>Ajouter un joueur!</h2>
     <form [formGroup]="joueurForm" (ngSubmit)="onSavePlayer()">
       <div class="form-group">
-        <label for="name">Prénom</label>
-        <input type="text" id="name" class="form-control" formControlName="name">
+        <input type="text" class="form-control" placeholder="Prénom" formControlName="name">
       </div>
       <button type="submit" class="btn btn-success" [disabled]="joueurForm.invalid">Ajouter</button>
     </form>
   </div>
 
-  <h3>Joueur du gang !</h3>
-  <ul class="list-group">
+
+  <ul class="list-group mt-5">
+    <h3>Joueur du gang !</h3>
     <li class="list-group-item" *ngFor="let name of listPlayers">
       <span>{{name.payload.doc.data().nom}}</span>
     </li>

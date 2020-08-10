@@ -1,14 +1,14 @@
 <main>
   <div class="container">
-    <div class="row">
-      <div class="formulaireManche">
+    <div class="row mx-auto">
+      <div class="formulaireManche mt-3">
         <form [formGroup]="mancheForm" (ngSubmit)="onSaveManche()" *ngFor="let name of prenom | async">
-          <h2>Manche {{ countManche }} {{ name.M5A}}</h2>
+          <h3>Manche {{ countManche }} </h3>
           <div class="form-group">
             <label for="scA">Team {{ name.joueur1 }}/{{ name.joueur2 }} | Total: {{ name.scoreA }}</label>
             <input type="number" id="scA" class="form-control" formControlName="scoreTeamA" min="0" max="252">
             <div class="belotezone form-check">
-              <input type="checkbox" id="belote" class="form-check-input" formControlName="beloteA">
+              <input type="checkbox" id="belote" class="form-check-input" formControlName="beloteA" value="true">
               <label for="belote">Belote</label>
             </div>
             <div class="capotezone form-check">

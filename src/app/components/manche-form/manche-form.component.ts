@@ -56,21 +56,39 @@ export class MancheFormComponent implements OnInit {
   }
 
   onSaveManche() {
-    const scoreA = this.mancheForm.get('scoreTeamA').value;
-    const scoreB = this.mancheForm.get('scoreTeamB').value;
+    let scoreA = this.mancheForm.get('scoreTeamA').value;
+    let scoreB = this.mancheForm.get('scoreTeamB').value;
     const preneur = this.mancheForm.get('preneur').value;
+    const beloteTA = this.mancheForm.get('beloteA').value;
+    const beloteTB = this.mancheForm.get('beloteB').value;
+    const capotTA = this.mancheForm.get('capotA').value;
+    const capotTB = this.mancheForm.get('capotB').value;
+    if (beloteTA){
+      scoreA = scoreA + 20;
+    }
+    if (beloteTB){
+      scoreB = scoreB + 20;
+    }
+    if (capotTA){
+      scoreA = 0;
+      scoreB = 252;
+    }
+    if (capotTB){
+      scoreB = 0;
+      scoreA = 252;
+    }
     this.totA = this.totA + scoreA;
     this.totB = this.totB + scoreB;
-    this.updateCurrentManche(this.id, this.countManche, this.totA, this.totB, preneur);
+    this.updateCurrentManche(this.id, this.countManche, scoreA, scoreB, this.totA, this.totB, preneur);
     this.countManche = ++this.countManche;
     if(this.countManche === 13) {
-      this.belote.addFinalBelote(this.prenom, this.id);
+      this.belote.deleteCurrentGame(this.id);
       this.router.navigate(['BeloteRanking']);
     }
   }
   /* Update manche */
-  updateCurrentManche(id, manche, scoreTeamA, scoreTeamB, preneur) {
-    this.belote.updateManche(id, manche, scoreTeamA, scoreTeamB, preneur);
+  updateCurrentManche(id, manche, scoreTeamA, scoreTeamB, scoreTotalA, scoreTotalB, preneur) {
+    this.belote.updateManche(id, manche, scoreTeamA, scoreTeamB, scoreTotalA, scoreTotalB, preneur);
   }
   getPlayerNameInGame(id) {
     this.belote

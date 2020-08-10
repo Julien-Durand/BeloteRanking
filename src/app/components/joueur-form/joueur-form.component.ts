@@ -13,8 +13,6 @@ import {Joueur} from '../../models/joueur.model';
 export class JoueurFormComponent implements OnInit {
   joueurForm: FormGroup;
 
-  joueur: Joueur = new Joueur();
-  joueurs: Joueur[];
   listPlayers: any[];
 
   constructor(private formBuilder: FormBuilder,

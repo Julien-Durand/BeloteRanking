@@ -24,5 +24,8 @@ export class HomeComponent implements OnInit {
   btnBelote() {
     this.router.navigate(['BeloteRanking/Belote']);
   }
+  bntScores() {
+    this.router.navigate(['BeloteRanking/Scores']);
+  }
 
 }
