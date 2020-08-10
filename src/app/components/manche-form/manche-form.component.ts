@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {BeloteService} from '../../services/belote.service';
 import {AngularFirestore} from '@angular/fire/firestore';
@@ -16,15 +16,17 @@ export class MancheFormComponent implements OnInit {
   id: string;
   mancheForm: FormGroup;
   playerNameOfGame;
-  _db: AngularFirestore;
   prenom: Observable<any>;
+  countManche = 1;
+  totA = 0;
+  totB = 0;
 
   constructor(private actRoute: ActivatedRoute,
               private formBuilder: FormBuilder,
               private belote: BeloteService,
-              private db: AngularFirestore) {
+              private db: AngularFirestore,
+              private router: Router) {
     this.id = this.actRoute.snapshot.params.id;
-    this._db = db;
     this.prenom = db
       .collection<Game>('CurrentGame')
       .snapshotChanges()
@@ -39,14 +41,12 @@ export class MancheFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.initManche();
-    // this.getPlayerNameInGame(this.id);
-
   }
 
   initManche() {
     this.mancheForm = this.formBuilder.group({
-      scoreTeamA: ['0', Validators.required],
-      scoreTeamB: ['0', Validators.required],
+      scoreTeamA: [ 0, Validators.required],
+      scoreTeamB: [ 0, Validators.required],
       preneur: ['', Validators.required],
       beloteA: [false, Validators.required],
       capotA: [false, Validators.required],
@@ -59,7 +59,18 @@ export class MancheFormComponent implements OnInit {
     const scoreA = this.mancheForm.get('scoreTeamA').value;
     const scoreB = this.mancheForm.get('scoreTeamB').value;
     const preneur = this.mancheForm.get('preneur').value;
-
+    this.totA = this.totA + scoreA;
+    this.totB = this.totB + scoreB;
+    this.updateCurrentManche(this.id, this.countManche, this.totA, this.totB, preneur);
+    this.countManche = ++this.countManche;
+    if(this.countManche === 13) {
+      this.belote.addFinalBelote(this.prenom, this.id);
+      this.router.navigate(['BeloteRanking']);
+    }
+  }
+  /* Update manche */
+  updateCurrentManche(id, manche, scoreTeamA, scoreTeamB, preneur) {
+    this.belote.updateManche(id, manche, scoreTeamA, scoreTeamB, preneur);
   }
   getPlayerNameInGame(id) {
     this.belote
@@ -68,5 +79,6 @@ export class MancheFormComponent implements OnInit {
         res => (this.playerNameOfGame = res)
       );
   }
+
 
 }
