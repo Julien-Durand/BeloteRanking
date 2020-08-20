@@ -19,7 +19,7 @@ Application pour sauvegarder les scores de belote ! Elle permet aussi d'afficher
 
 Développement avec angular. Utilisation de bootstrap, firebase
 
-#To Do ! :)
+# To Do ! :)
 
 - Fix bug belote point and capot
 - After add manche, change the values in the inputs
