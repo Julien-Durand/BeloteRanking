@@ -47,11 +47,11 @@ export class MancheFormComponent implements OnInit {
     this.mancheForm = this.formBuilder.group({
       scoreTeamA: [ 0, Validators.required],
       scoreTeamB: [ 0, Validators.required],
-      preneur: ['', Validators.required],
-      beloteA: [false, Validators.required],
-      capotA: [false, Validators.required],
-      beloteB: [false, Validators.required],
-      capotB: [false, Validators.required]
+      preneur: ['', Validators.required]
+      // beloteA: [false, Validators.required],
+      // capotA: [false, Validators.required],
+      // beloteB: [false, Validators.required],
+      // capotB: [false, Validators.required]
     });
   }
 
@@ -63,20 +63,20 @@ export class MancheFormComponent implements OnInit {
     const beloteTB = this.mancheForm.get('beloteB').value;
     const capotTA = this.mancheForm.get('capotA').value;
     const capotTB = this.mancheForm.get('capotB').value;
-    if (beloteTA){
-      scoreA = scoreA + 20;
-    }
-    if (beloteTB){
-      scoreB = scoreB + 20;
-    }
-    if (capotTA){
-      scoreA = 0;
-      scoreB = 252;
-    }
-    if (capotTB){
-      scoreB = 0;
-      scoreA = 252;
-    }
+    // if (beloteTA){
+    //   scoreA = scoreA + 20;
+    // }
+    // if (beloteTB){
+    //   scoreB = scoreB + 20;
+    // }
+    // if (capotTA){
+    //   scoreA = 0;
+    //   scoreB = 252;
+    // }
+    // if (capotTB){
+    //   scoreB = 0;
+    //   scoreA = 252;
+    // }
     this.totA = this.totA + scoreA;
     this.totB = this.totB + scoreB;
     this.updateCurrentManche(this.id, this.countManche, scoreA, scoreB, this.totA, this.totB, preneur);

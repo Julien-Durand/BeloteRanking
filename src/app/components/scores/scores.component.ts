@@ -20,9 +20,8 @@ export class ScoresComponent implements OnInit {
 
   ngOnInit(): void {
     // this.onGetGames();
-
     this.list = this.db
-      .collection('Games')
+      .collection('Games', ref => ref.orderBy('date', 'desc'))
       .snapshotChanges()
       .pipe(map(actions => {
         return actions.map(a => {

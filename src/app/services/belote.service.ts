@@ -243,8 +243,8 @@ export class BeloteService {
       case 10:
         this.db.collection('Games').doc(id).update({
           manche: mancheN,
-          scoreA: scoreTeamA,
-          scoreB: scoreTeamB,
+          scoreA: scoreTotalA,
+          scoreB: scoreTotalB,
           M10A: scoreTeamA,
           M10B: scoreTeamB,
           preneurM10: preneur
