@@ -17,7 +17,7 @@ Application pour sauvegarder les scores de belote ! Elle permet aussi d'afficher
 
 # Tools
 
-Développement avec angular. Utilisation de bootstrap, firebase
+Développement avec angular. Utilisation de bootstrap, firebase cloud et hosting
 
 # To Do ! :)
 
@@ -28,5 +28,7 @@ Développement avec angular. Utilisation de bootstrap, firebase
 - Add Player start
 - Update the system game for the stats gamers
 - Show the gamers stats
+
+Réaliser une v2 avec ionic et firebase database realtime 
 
 # Just for fun and work my angular skill
