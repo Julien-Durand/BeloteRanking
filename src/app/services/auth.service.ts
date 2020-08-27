@@ -45,4 +45,9 @@ export class AuthService {
       .signOut();
   }
 
+  getUserId(){
+    const userUID = firebase.auth().currentUser;
+    return userUID.uid;
+  }
+
 }

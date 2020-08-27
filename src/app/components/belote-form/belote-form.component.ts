@@ -17,8 +17,6 @@ registerLocaleData(localeFr, 'fr');
 export class BeloteFormComponent implements OnInit, OnDestroy  {
   beloteForm: FormGroup;
   listPlayers: any[];
-  playerInfo: any;
-  playerNameOfGame;
   idforGame: string;
 
   belotegame: Game[];
@@ -79,15 +77,6 @@ export class BeloteFormComponent implements OnInit, OnDestroy  {
         res => (this.listPlayers = res)
       );
   }
-
-  // getPlayerInfo(id) {
-  //   this.player
-  //     .getPlayer(id)
-  //     .subscribe(
-  //       res => (this.playerInfo = res)
-  //     );
-  // }
-
 
   ngOnDestroy() {
     this.beloteSubscription.unsubscribe();

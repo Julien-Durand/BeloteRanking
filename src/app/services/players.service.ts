@@ -16,9 +16,9 @@ export class PlayersService {
   }
 
   /* Add Player */
-  addPlayer(idunique, name) {
-    return this.db.collection('Joueurs').doc('' + idunique).set({
-      id: idunique,
+  addPlayer(uid, name, idJoueur) {
+    return this.db.collection('users').doc('' + uid).collection('Joueurs').doc('' + name).set({
+      id: idJoueur,
       nom: name,
       MoyenPriseParPoint: '0',
       TotalPrise: '0',
@@ -33,15 +33,10 @@ export class PlayersService {
     });
   }
   /* Read */
-  getPlayers() {
-    return this.db.collection('Joueurs').snapshotChanges();
+   getPlayers(){
+    const uidP = this.authService.getUserId();
+    return this.db.collection('users').doc('' + uidP).collection('Joueurs').snapshotChanges();
   }
-
-  // getPlayer(idc) {
-  //   return this.db.collection('Partie')
-  //     .doc(idc)
-  //     .snapshotChanges();
-  // }
 
   /* Update */
   /* Delete player */

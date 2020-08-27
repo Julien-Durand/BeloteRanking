@@ -36,7 +36,8 @@ export class JoueurFormComponent implements OnInit {
   onSavePlayer() {
     const name = this.joueurForm.get('name').value;
     const id = this.player.idGenerator();
-    this.player.addPlayer(id, name);
+    const uid = this.authService.getUserId();
+    this.player.addPlayer(uid, name, id);
     this.router.navigate(['BeloteRanking']);
   }
 

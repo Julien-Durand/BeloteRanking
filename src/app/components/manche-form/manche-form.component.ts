@@ -6,6 +6,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {Game} from '../../models/belote.model';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'BR-manche-form',
@@ -25,9 +26,13 @@ export class MancheFormComponent implements OnInit {
               private formBuilder: FormBuilder,
               private belote: BeloteService,
               private db: AngularFirestore,
-              private router: Router) {
+              private router: Router,
+              private authService: AuthService) {
     this.id = this.actRoute.snapshot.params.id;
+    const uid = this.authService.getUserId();
     this.prenom = db
+      .collection('users')
+      .doc('' + uid)
       .collection<Game>('CurrentGame')
       .snapshotChanges()
       .pipe(map(actions => {
@@ -45,8 +50,8 @@ export class MancheFormComponent implements OnInit {
 
   initManche() {
     this.mancheForm = this.formBuilder.group({
-      scoreTeamA: [ 0, Validators.required],
-      scoreTeamB: [ 0, Validators.required],
+      scoreTeamA: [ '', Validators.required],
+      scoreTeamB: [ '', Validators.required],
       preneur: ['', Validators.required]
       // beloteA: [false, Validators.required],
       // capotA: [false, Validators.required],
@@ -56,13 +61,13 @@ export class MancheFormComponent implements OnInit {
   }
 
   onSaveManche() {
-    let scoreA = this.mancheForm.get('scoreTeamA').value;
-    let scoreB = this.mancheForm.get('scoreTeamB').value;
+    const scoreA = this.mancheForm.get('scoreTeamA').value;
+    const scoreB = this.mancheForm.get('scoreTeamB').value;
     const preneur = this.mancheForm.get('preneur').value;
-    const beloteTA = this.mancheForm.get('beloteA').value;
-    const beloteTB = this.mancheForm.get('beloteB').value;
-    const capotTA = this.mancheForm.get('capotA').value;
-    const capotTB = this.mancheForm.get('capotB').value;
+    // const beloteTA = this.mancheForm.get('beloteA').value;
+    // const beloteTB = this.mancheForm.get('beloteB').value;
+    // const capotTA = this.mancheForm.get('capotA').value;
+    // const capotTB = this.mancheForm.get('capotB').value;
     // if (beloteTA){
     //   scoreA = scoreA + 20;
     // }
@@ -90,13 +95,4 @@ export class MancheFormComponent implements OnInit {
   updateCurrentManche(id, manche, scoreTeamA, scoreTeamB, scoreTotalA, scoreTotalB, preneur) {
     this.belote.updateManche(id, manche, scoreTeamA, scoreTeamB, scoreTotalA, scoreTotalB, preneur);
   }
-  getPlayerNameInGame(id) {
-    this.belote
-      .getPlayerGame(id)
-      .subscribe(
-        res => (this.playerNameOfGame = res)
-      );
-  }
-
-
 }

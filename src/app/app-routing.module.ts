@@ -5,9 +5,9 @@ import {SignInComponent} from './auth/sign-in/sign-in.component';
 import {HomeComponent} from './components/home/home.component';
 import {JoueurFormComponent} from './components/joueur-form/joueur-form.component';
 import {AuthGuard} from './services/auth-guard';
-import {BeloteFormComponent} from "./components/belote-form/belote-form.component";
-import {MancheFormComponent} from "./components/manche-form/manche-form.component";
-import {ScoresComponent} from "./components/scores/scores.component";
+import {BeloteFormComponent} from './components/belote-form/belote-form.component';
+import {MancheFormComponent} from './components/manche-form/manche-form.component';
+import {ScoresComponent} from './components/scores/scores.component';
 
 
 const routes: Routes = [

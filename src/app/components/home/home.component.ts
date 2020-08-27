@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
+import {AngularFirestore} from '@angular/fire/firestore';
 
 @Component({
   selector: 'BR-home',
@@ -16,8 +17,9 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.authService.user;
-  }
+    console.log(this.user);
 
+  }
   btnAddPlayer() {
     this.router.navigate(['BeloteRanking/Joueur']);
   }
