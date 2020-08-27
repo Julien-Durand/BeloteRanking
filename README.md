@@ -21,6 +21,7 @@ Développement avec angular. Utilisation de bootstrap, firebase cloud et hosting
 
 # To Do ! :)
 
+- Show the data user and not all datas
 - Fix bug belote point and capot
 - After add manche, change the values in the inputs
 - Add dispute (81-81)
@@ -28,7 +29,7 @@ Développement avec angular. Utilisation de bootstrap, firebase cloud et hosting
 - Add Player start
 - Update the system game for the stats gamers
 - Show the gamers stats
+- Design
 
-Réaliser une v2 avec ionic et firebase database realtime 
 
 # Just for fun and work my angular skill
