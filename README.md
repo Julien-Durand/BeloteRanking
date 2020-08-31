@@ -21,7 +21,7 @@ Développement avec angular. Utilisation de bootstrap, firebase cloud et hosting
 
 # To Do ! :)
 
-- Show the data user and not all datas
+- Show the data user and not all datas - Done 
 - Fix bug belote point and capot
 - After add manche, change the values in the inputs
 - Add dispute (81-81)
